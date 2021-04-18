@@ -1,2 +1,3 @@
 *.zip
 serverless.yml
+package-lock.json

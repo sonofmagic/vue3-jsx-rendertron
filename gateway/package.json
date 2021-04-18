@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development node ./src/listener.js"
+    "dev": "cross-env NODE_ENV=development node ./src/listener.js",
+    "deploy": "yarn gen && serverless deploy",
+    "gen": "cross-env SLS_ENV=release NODE_ENV=production node ./script/genCfg.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +21,6 @@
     "express": "^4.17.1",
     "helmet": "^4.5.0",
     "isbot": "^3.0.26",
-    "puppeteer": "^8.0.0",
     "rendertron": "^3.1.0"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "4.2.1"
+    "eslint-plugin-promise": "4.2.1",
+    "serverless-config-generator": "^1.0.4"
   }
 }

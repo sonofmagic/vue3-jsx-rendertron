@@ -3,7 +3,7 @@
  * @typedef {import('puppeteer').Browser} Browser
  */
 const { Renderer } = require('rendertron/build/renderer')
-
+// 直接使用 rendertron 的版本
 const puppeteer = require('puppeteer')
 
 /**
