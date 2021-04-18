@@ -1,0 +1,39 @@
+{
+  "name": "vue3-spa",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "deploy:cdn": "node ./scripts/cdn.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
+    "mockjs": "^1.1.0",
+    "nanoid": "^3.1.22",
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vitejs/plugin-vue-jsx": "^1.1.3",
+    "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "cos-nodejs-sdk-v5": "^2.9.13",
+    "dotenv": "^8.2.0",
+    "eslint": "7.12.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-vue": "^7.9.0",
+    "klaw": "^3.0.0",
+    "vite": "^2.1.5",
+    "vite-plugin-mock": "^2.5.0"
+  }
+}
