@@ -4,17 +4,16 @@ const bodyParser = require('body-parser')
 // router.use(cookieParser())
 // router.use(require('helmet')())
 router.use(bodyParser.json())
+const exportsObject = require('../renderer')
 
-router.all('/', (req, res) => {
-  res.send('This is api')
-  const url = req.body
-  // const fullURL = req.protocol + '://' + req.get('host') + req.originalUrl
-  // res.setHeader('Content-Length', stat.size);
+router.get('/pdf/:url', async (req, res) => {
+  const { url } = req.params
+  const page = await exportsObject.browser.newPage()
+  await page.goto(url)
+  const buf = await page.pdf()
+  page.close()
   res.setHeader('Content-Type', 'application/pdf')
-  res.setHeader(
-    `Content-Disposition', 'attachment; filename=${encodeURIComponent(url)}.pdf`
-  )
-  res.send()
+  res.send(buf)
 })
 
 module.exports = router

@@ -1,9 +1,19 @@
-const isProd = process.env.NODE_ENV === 'production'
-const isRelease = process.env.SLS_ENV === 'release'
-const isDev = process.env.NODE_ENV === 'development'
+const {
+  NODE_ENV,
+  SLS_ENV,
+  TENCENT_CLOUDBASE_ENVID,
+  TENCENT_SECRET_KEY,
+  TENCENT_SECRET_ID
+} = process.env
+const isProd = NODE_ENV === 'production'
+const isRelease = SLS_ENV === 'release'
+const isDev = NODE_ENV === 'development'
 
 module.exports = {
   isProd,
   isRelease,
-  isDev
+  isDev,
+  TENCENT_CLOUDBASE_ENVID,
+  TENCENT_SECRET_KEY,
+  TENCENT_SECRET_ID
 }

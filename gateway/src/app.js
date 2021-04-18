@@ -7,6 +7,7 @@ const {
 } = require('./middleware')
 const app = express()
 app.use(rendererMiddleware)
+// header X-Requested-With : XMLHttpRequest 用来绕过 staticFileMiddleware
 app.use(staticFileMiddleware)
 app.use(requestForwardMiddleware)
 app.use('/api', require('./router'))
