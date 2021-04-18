@@ -16,17 +16,18 @@ let browser
  */
 let renderer
 
+const exportsObject = {
+  createRenderer,
+  renderer,
+  browser
+}
 async function createRenderer (config) {
-  browser = await puppeteer.launch({ args: config.puppeteerArgs })
-  browser.on('disconnected', () => {
+  exportsObject.browser = await puppeteer.launch({ args: config.puppeteerArgs })
+  exportsObject.browser.on('disconnected', () => {
     createRenderer(config)
   })
-  renderer = new Renderer(browser, config)
-  return renderer
+  exportsObject.renderer = new Renderer(exportsObject.browser, config)
+  return exportsObject.renderer
 }
 
-module.exports = {
-  browser,
-  renderer,
-  createRenderer
-}
+module.exports = exportsObject

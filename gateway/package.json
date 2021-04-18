@@ -15,8 +15,10 @@
     "body-parser": "^1.19.0",
     "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.5.0",
+    "isbot": "^3.0.26",
     "puppeteer": "^8.0.0",
     "rendertron": "^3.1.0"
   },
