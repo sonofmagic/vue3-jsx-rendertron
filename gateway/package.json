@@ -4,18 +4,24 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development node ./src/listener.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@cloudbase/node-sdk": "^2.5.1",
+    "body-parser": "^1.19.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
-    "puppeteer-core": "^8.0.0",
-    "rendertron": "^3.1.0",
-    "rendertron-middleware": "^0.1.5"
+    "helmet": "^4.5.0",
+    "puppeteer": "^8.0.0",
+    "rendertron": "^3.1.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "7.12.1",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "2.22.1",

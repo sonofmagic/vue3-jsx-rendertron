@@ -1,28 +1,21 @@
-// const express = require('express')
-// const rendertron = require('rendertron-middleware')
+const express = require('express')
+const { isRelease } = require('./env')
+const {
+  requestForwardMiddleware,
+  staticFileMiddleware
+} = require('./middleware')
+const app = express()
 
-// const app = express()
+app.use(staticFileMiddleware)
+app.use(requestForwardMiddleware)
+app.use('/api', require('./router'))
+app.use(staticFileMiddleware)
+const slsInitialize = require('./slsInitialize')
 
-// app.use(
-//   rendertron.makeMiddleware({
-//     proxyUrl: 'http://my-rendertron-instance/render'
-//   })
-// )
+if (isRelease) {
+  app.slsInitialize = slsInitialize
+} else {
+  slsInitialize()
+}
 
-// app.use(express.static('files'))
-// app.listen(8080)
-const puppeteer = require('puppeteer')
-
-;(async () => {
-  const browser = await puppeteer.launch()
-  const version = await browser.version()
-  console.log(version)
-  // Create a new incognito browser context.
-  const context = await browser.createIncognitoBrowserContext()
-  // Create a new page in a pristine context.
-  const page = await context.newPage()
-  // Do stuff
-  const response = await page.goto('https://www.baidu.com/')
-
-  console.log(response)
-})()
+module.exports = app
