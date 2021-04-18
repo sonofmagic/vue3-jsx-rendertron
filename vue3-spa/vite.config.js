@@ -7,11 +7,12 @@ import { nanoid } from 'nanoid'
 import { viteMockServe } from 'vite-plugin-mock'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 let base = '/'
-const cdnSite = 'https://cdn.icebreaker.top/rendertron/release/'
+const cdnSite = 'https://cdn.icebreaker.top/'
 if (process.env.NODE_ENV === 'production') {
-  const prefix = nanoid(10) + dayjs().format('YYYYMMDD') + '/'
+  const prefix =
+    'rendertron/release/' + nanoid(10) + dayjs().format('YYYYMMDD') + '/'
   base = cdnSite + prefix
-  fs.writeFileSync('./publicPath.js', `module.exports = '${base}'`)
+  fs.writeFileSync('./publicPath.js', `module.exports = '${prefix}'`)
 }
 // https://vitejs.dev/config/
 export default defineConfig({
