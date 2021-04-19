@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy:cdn": "node ./scripts/cdn.js"
+    "deploy:cdn": "node ./scripts/cdn.js",
+    "copy": "node ./scripts/copy.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

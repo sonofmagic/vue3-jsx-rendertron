@@ -19,7 +19,9 @@ const {
   TENCENT_CLOUDBASE_ENVID,
   TENCENT_SECRET_KEY,
   TENCENT_SECRET_ID,
-  TENCENT_APIGATEWAY_SERVICEID
+  TENCENT_APIGATEWAY_SERVICEID,
+  TENCENT_TOPICID,
+  TENCENT_LOGSETID
 } = process.env
 // https://github.com/serverless-components/tencent-nuxtjs/blob/master/docs/configure.md
 const config = {
@@ -46,7 +48,7 @@ const config = {
     ],
     functionConf: {
       timeout: 30,
-      memorySize: 512,
+      memorySize: 1024,
       environment: {
         variables: {
           NODE_ENV,
@@ -56,12 +58,17 @@ const config = {
           TENCENT_SECRET_KEY,
           TENCENT_SECRET_ID
         }
+      },
+      cls: {
+        logsetId: TENCENT_LOGSETID,
+        topicId: TENCENT_TOPICID
       }
     },
     apigatewayConf: {
       isDisabled: true, // 是否禁用自动创建 API 网关功能
       protocols: ['http', 'https'],
-      environment: 'release'
+      environment: 'release',
+      isBase64Encoded: true
     }
   }
 }
