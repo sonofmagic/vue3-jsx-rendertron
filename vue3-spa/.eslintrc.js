@@ -1,23 +1,19 @@
 module.exports = {
   root: true,
   env: {
-    browser: true,
     node: true,
-    jasmine: true,
+    browser: true,
+    es2020: true,
     jest: true,
-    es6: true
   },
   parserOptions: {
-    ecmaVersion: 2020
+    parser: 'babel-eslint',
+    ecmaVersion: 2020,
   },
   extends: [
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     'eslint:recommended',
-    'standard',
-    '@vue/prettier'
+    '@vue/prettier',
   ],
   rules: {},
-  globals: {
-    h: true
-  }
 }

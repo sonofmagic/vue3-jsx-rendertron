@@ -5,11 +5,11 @@ export default defineComponent({
   props: {
     msg: {
       type: [String],
-      default: ''
-    }
+      default: '',
+    },
   },
-  setup (props) {
-    const { msg } = props
+  setup(props) {
+    const msg = props.msg
     const state = reactive({ name: '' })
 
     axios.get('/api/get').then(({ data }) => {
@@ -20,13 +20,13 @@ export default defineComponent({
       {
         name: 'Get Request',
         info: '暂无数据',
-        show: false
+        show: false,
       },
       {
         name: 'Post Request',
         info: '暂无数据',
-        show: false
-      }
+        show: false,
+      },
     ])
     const getRoleById = () => {
       requestLists.value[0].show = true
@@ -40,7 +40,7 @@ export default defineComponent({
       axios
         .post('/api/createUser', {
           name: 'vben',
-          gender: 'man'
+          gender: 'man',
         })
         .then(({ data }) => {
           requestLists.value[1].info = data
@@ -57,12 +57,11 @@ export default defineComponent({
             href="https://github.com/sonofmagic/vue3-jsx-rendertron"
             target="_blank"
           >
-
             项目地址
           </a>
         </p>
         <h2>作者:{state.name}</h2>
       </>
     )
-  }
+  },
 })

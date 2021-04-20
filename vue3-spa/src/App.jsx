@@ -1,16 +1,21 @@
-import { defineComponent } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import HelloWorld from '@/components/HelloWorld.jsx'
 import logo from '@/assets/logo.png'
-import './App.css'
+import './App.scss'
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
   },
-  setup () {
-    return () => <>
-      <img alt="Vue logo" src={logo} />
-      <HelloWorld msg="Hello Vue 3 + Vite + JSX" />
-    </>
-  }
+  setup() {
+    // const state = reactive({
+
+    // })
+    return () => (
+      <div className="flex ">
+        <img alt="Vue logo" src={logo} />
+        <HelloWorld msg="Hello Vue 3 + Vite + JSX" />
+      </div>
+    )
+  },
 })
