@@ -11,21 +11,21 @@ const {
   TENCENT_SECRET_KEY,
   TENCENT_SECRET_ID,
   TENCENT_COS_CDN_BUCKET,
-  TENCENT_COS_CDN_REGION
+  TENCENT_COS_CDN_REGION,
 } = process.env
 
 const cos = new COS({
   SecretId: TENCENT_SECRET_ID,
-  SecretKey: TENCENT_SECRET_KEY
+  SecretKey: TENCENT_SECRET_KEY,
 })
 
 const uploadFileOption = {
   Bucket: TENCENT_COS_CDN_BUCKET,
   Region: TENCENT_COS_CDN_REGION,
-  CacheControl: 'public,max-age=31536000'
+  CacheControl: 'public,max-age=31536000',
 }
 
-function putObject (opts) {
+function putObject(opts) {
   return new Promise((resolve, reject) => {
     cos.putObject(opts, (err, data) => {
       if (err) {
@@ -37,13 +37,13 @@ function putObject (opts) {
   })
 }
 
-async function uploadFile (Key, Body, opts) {
+async function uploadFile(Key, Body, opts) {
   try {
     await putObject(
       Object.assign(
         {
           Key,
-          Body
+          Body,
         },
         uploadFileOption,
         opts
@@ -55,7 +55,7 @@ async function uploadFile (Key, Body, opts) {
 }
 const cloudPath = require('../publicPath.js')
 
-async function uploadDir (prefix, targetPath) {
+async function uploadDir(prefix, targetPath) {
   const absTargetPath = path.resolve(root, targetPath)
   for await (const file of klaw(targetPath)) {
     const { path: absPath, stats } = file
@@ -69,7 +69,7 @@ async function uploadDir (prefix, targetPath) {
   }
 }
 
-async function main () {
+async function main() {
   await uploadDir(cloudPath, 'dist')
 }
 

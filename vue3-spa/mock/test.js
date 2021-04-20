@@ -2,26 +2,26 @@ export default [
   {
     url: '/api/get',
     method: 'get',
-    timeout: '100-400',
+    timeout: 100,
     response: ({ query }) => {
       return {
         code: 0,
         data: {
-          name: 'icebreaker'
-        }
+          name: 'icebreaker',
+        },
       }
-    }
+    },
   },
   {
-    url: '/api/post',
-    method: 'post',
+    url: '/api/array',
+    method: 'get',
     timeout: 2000,
     response: {
       code: 0,
       data: {
-        name: 'icebreaker'
-      }
-    }
+        arr: ['A', 'B', 'C'],
+      },
+    },
   },
   {
     url: '/api/text',
@@ -37,6 +37,6 @@ export default [
       res.setHeader('Content-Type', 'text/plain')
       res.statusCode = 200
       res.end(`hello, ${reqbody}`)
-    }
-  }
+    },
+  },
 ]
