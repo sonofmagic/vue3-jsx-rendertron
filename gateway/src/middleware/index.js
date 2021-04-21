@@ -20,17 +20,6 @@ const rendererMiddleware = async (req, res, next) => {
   const botFlag = isbot(ua)
   if (botFlag) {
     const fullURL = req.protocol + '://' + req.get('host') + req.originalUrl
-    console.log(fullURL, ua)
-
-    async function rendererWithInsetDb () {
-      const result = await rendererMoudle.renderer.serialize(fullURL, true)
-      res.send(result.content)
-      await pageCacheCol.add({
-        url: fullURL,
-        ts: Date.now(),
-        content: result.content
-      })
-    }
 
     const { data } = await pageCacheCol
       .where({
@@ -39,15 +28,23 @@ const rendererMiddleware = async (req, res, next) => {
       .get()
     if (data.length) {
       const hit = data[0]
-      const ts = Date.now()
-      // 半小时的cache
-      if (ts - hit.ts <= 1000 * 60 * 30) {
-        res.send(hit.content)
-      } else {
-        await rendererWithInsetDb()
-      }
+      // const ts = Date.now()
+      // 由于实时渲染，又慢内存消耗又大，建议使用永久缓存，通过检测xhr获得数据的变化，手动去刷新缓存
+      res.send(hit.content)
+      // 半小时的cache 方案（废弃）
+      // if (ts - hit.ts <= 1000 * 60 * 30) {
+      //   res.send(hit.content)
+      // } else {
+      //   await rendererWithInsetDb()
+      // }
     } else {
-      await rendererWithInsetDb()
+      const result = await rendererMoudle.renderer.serialize(fullURL, true)
+      res.send(result.content)
+      await pageCacheCol.add({
+        url: fullURL,
+        // ts: Date.now(),
+        content: result.content
+      })
     }
   } else {
     next()
