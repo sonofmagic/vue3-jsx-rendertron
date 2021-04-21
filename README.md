@@ -2,11 +2,11 @@
 
 ## 什么是 rendertron ?
 
-Google 团队的一个对网页进行渲染的项目
+rendertron 是 Google 团队的一个对网页进行渲染的项目
 
-它利用 `headless chromium` 对网页进行实时渲染
+它利用 `headless chromium` 对指定的网页进行实时渲染
 
-尤其适合 spa(client side render) 应用的场景
+<!-- 由于会执行其中的 js 代码，尤其适合 spa(client side render) 应用的场景 -->
 
 <!-- 一言以蔽之：**面对爬虫渲染** -->
 
@@ -14,23 +14,23 @@ Google 团队的一个对网页进行渲染的项目
 
 `vue / react` 这类框架的兴起，给前端开发带来了巨大的变化
 
-然而默认他们都是使用的 csr 
+然而默认他们都是使用的 csr
 
-这带来一个问题，由于 spa应用 中绝大部分的 `html dom` 都是由 `js` 去控制产生销毁的
+这带来一个问题，由于 spa 应用 中绝大部分的 `html dom` 都是由 `js` 去控制产生销毁的
 
 我们浏览器访问一个这样的应用，去查看源代码的话
 
-只能看到引入了大批的js文件，并没有任何显示的数据
+只能看到引入了大批的 js 文件，并没有任何显示的数据
 
 如图：
 
 ![user-view](./assets/images/user-view.png)
 
-原先基于 `http` 的爬虫的视角也是如此，他并不会执行其中的 `js`
+一些 **老爬虫** 的视角也是如此，他并不会执行其中的 `js`
 
 也就没法通过里面的 `xhr` 等等异步方式去获取数据，给 `body` 里面添加内容
 
-所以以普通爬虫的视角来看，我们的 `spa` 应用简直可以用空无一物来形容
+所以以它们的视角来看，我们的 `spa` 应用简直可以用空无一物来形容
 
 这就对我们做 `seo` 带来了问题
 
@@ -44,7 +44,7 @@ Google 团队的一个对网页进行渲染的项目
 
 不过，假如说有一个动态页面，要根据百万量级数据去生成百万个静态的 html
 
-这种方案显然是无法接受的，毕竟渲染这么大的量很花时间，部署的话，这么多静态的东西也很大，得不偿失
+这种方案显然是无法接受的，毕竟渲染这么大的量很花时间，部署的话，这么多静态的东西占用空间也很大，得不偿失
 
 ### server side render
 
@@ -60,36 +60,33 @@ Google 团队的一个对网页进行渲染的项目
 
 - 对已经开发好的 `spa` 项目，有可能改造成本比较高
 
-- 对前端开发人员，有更高的要求，要清楚哪些代码跑在 `nodejs`，哪些在前端，而哪些前端服务端都在跑
+- 对前端开发人员，有更高的技术要求，要清楚哪些代码跑在 `nodejs`，哪些在`brower`，而哪些二者都在跑
 
-
-然而他的优点是显而易见的 , 推荐大家采用这种方案去搞 `seo`
-
-
+然而他的优点也是显而易见的 , 推荐大家采用这种方案去搞 `seo`
 
 <!-- 在webpack的动态引入还未出现的时代，spa应用一次性引入所有的js过大 -->
 
 ### rendertron
 
-前面说了 ssr 这么多好处，为啥我们还需要 rendertron 方案呢
+<!-- 前面说了 ssr 这么多好处，为啥我们还需要 rendertron 方案呢 -->
 
-这也是给我们在 spa 应用无法改造时候多一条出路
+rendertron 这种方案，给我们在 spa 应用无法改造时候多一条出路
 
-他可以在尽可能少改造原先的项目的情况下，达成我们 seo 的目的
+他可以在尽可能少改造原先的项目的情况下，达成我们 seo 的部分目的
 
 原理实际上也非常简单：
 
 ![flow](./assets/images/flow.png)
 
-通过使用 Headless Chrome 在内存中执行 Javascript，并在得到完整内容后，将内容返回给客户端。
+通过使用 `Headless Chrome` 在内存中执行 `Javascript`，并在得到完整内容后，将内容返回给客户端。
 
 ## rendertron 的 serverless 实践
 
 `rendertron` 本身只是一个 `puppeteer` 和 `koa` 的封装, 可以作为一个`koa`应用直接部署。
 
-在阿里云 serverless，通过 `fun` 的配置项，可以直接部署一个 `rendertron` 应用
+在阿里云 `serverless`，通过 `fun` 的配置项，可以直接部署一个 `rendertron` 应用
 
-而腾讯云 serverless, 也已经内置了 `chromium` , 我们也只需要安装 `puppeteer` ，不需要上传任何的二进制文件，就能直接使用了
+而腾讯云 `serverless`, 也已经内置了 `chromium` , 我们也只需要安装 `puppeteer` ，不需要上传任何的二进制文件，就能直接使用了
 
 > 目前腾讯云 SCF 内置版本是 HeadlessChrome/80.0.3987.0 (2021.04.19)
 
@@ -97,18 +94,23 @@ Google 团队的一个对网页进行渲染的项目
 
 ### Step1
 
-创建一个任意的 `spa` 应用，比如 `vite` + `vue3` , 随便写一点 `xhr` , 异步的渲染
+创建一个任意的 `spa` 应用，比如 `vite` + `vue3` , 随便写一点 `xhr` , 异步的渲染, 作为 `demo`
 
 ### Step2
 
 创建一个 `express` 应用,用 `history-api-fallback` 去处理 `history` 路由的 spa 应用的 `index.html`
 
-安装 `rendertron` ，然而我们不需要初始化 一个 `Rendertron` 实例，只借用他的 `Renderer` 中的策略
+安装 `rendertron` ，我们不需要初始化 一个 `Rendertron` 实例，只借用他的 `Renderer` 中的策略
 
 创建 `Renderer` 实例之后，我们就有了自己的 `browser` 和 `renderer` 了
 
-然后简单，写个中间件用 isBot 判断是不是爬虫，是爬虫就 去判断缓存，没有命中就把 fullPath 的页面，用 Renderer 去渲染，然后返回给爬虫，然后置缓存
+然后简单写个 **中间件** , 用 `isBot` 判断是不是爬虫
 
+是爬虫就 去判断缓存，没有命中就把爬虫访问的 `fullPath` 的页面，用 `Renderer` 去实时渲染，然后返回给爬虫，并置缓存
+
+是用户就正常返回 `index.html`
+
+例如：
 ```js
 // 以cloudbase json db为例
 const rendererMiddleware = async (req, res, next) => {
@@ -124,7 +126,7 @@ const rendererMiddleware = async (req, res, next) => {
       .get()
     if (data.length) {
       const hit = data[0]
-      
+
       // 由于实时渲染，又慢内存消耗又大，建议使用永久缓存，通过检测xhr获得数据的变化，手动去刷新缓存
       res.send(hit.content)
       // 半小时的cache 方案（废弃）
@@ -152,8 +154,10 @@ const rendererMiddleware = async (req, res, next) => {
 这样，基于 `SCF` 的一个自定义的 `rendertron` 就完成了
 
 ## 效果展示
+
 <!-- ### 用户源码视图 -->
-### 爬虫视角
+
+### 爬虫视角(Googlebot)
 
 ![bot-view](./assets/images/bot-view.png)
 
@@ -167,28 +171,23 @@ const rendererMiddleware = async (req, res, next) => {
 
 像 `ssr` 应用，假如不做页面/组件/数据这方面的缓存的话，复杂页面的渲染实际上也是比较慢的。
 
-而这种方案去实时渲染的话 , 相当于从 nodejs `server side` 的渲染引擎 那里，转移到了 `chromium` 这里
+而这种方案去实时渲染的话 , 计算负担相当于从 nodejs `server side` 的渲染引擎 那里，转移到了 `chromium` 这里
 
 简直就是：
 
-**又慢 , 又非常的耗内存** 
+**又慢 , 又非常的耗内存**
 
 <!-- 如果做 seo 改造方案的话 -->
 
 假如项目改造成本不高，建议直接上 ssr
 
-假如需要采用这种方案的话，也比较适合做永久缓存，然后根据页面数据的变化，在推送 `job` 中手动刷新指定路由的缓存，然后去更新指定的 `sitemap` 中的 `lastmod` 字段 ，再 **主动推送** 给搜索引擎 
+假如需要采用这种方案的话，也比较适合做永久缓存，然后根据页面数据的变化，在推送 `job` 中手动刷新指定路由的缓存，然后去更新指定的 `sitemap` 中的 `lastmod` 字段 ，再 **主动推送** 给搜索引擎
 
 而使用缓存过期的策略，不如每天凌晨，用 job 全部手动渲染，刷一遍缓存要好。
 
 不过页面或者数据量大的情况下，也比较花时间花内存。
 
-
-
-
-
-
-
+得不偿失。
 <!-- 而且由于 chromium 的内置，也能比较好的处理一些特殊的需求（笑~） -->
 
 <!-- 一句话总结，有条件的话，直接上 ssr ，自己有 chromium 服务的话，可以考虑这种方案 -->
