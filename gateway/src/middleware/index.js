@@ -28,21 +28,15 @@ const rendererMiddleware = async (req, res, next) => {
       .get()
     if (data.length) {
       const hit = data[0]
-      // const ts = Date.now()
       // 由于实时渲染，又慢内存消耗又大，建议使用永久缓存，通过检测xhr获得数据的变化，手动去刷新缓存
       res.send(hit.content)
-      // 半小时的cache 方案（废弃）
-      // if (ts - hit.ts <= 1000 * 60 * 30) {
-      //   res.send(hit.content)
-      // } else {
-      //   await rendererWithInsetDb()
-      // }
     } else {
       const result = await rendererMoudle.renderer.serialize(fullURL, true)
       res.send(result.content)
       await pageCacheCol.add({
         url: fullURL,
-        // ts: Date.now(),
+        userAgent: ua,
+        ts: Date.now(),
         content: result.content
       })
     }
