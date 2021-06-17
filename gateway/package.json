@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development node ./src/listener.js",
-    "deploy": "yarn gen && serverless deploy",
+    "deploy": "yarn gen && components deploy",
     "gen": "cross-env SLS_ENV=release NODE_ENV=production node ./script/genCfg.js"
   },
   "keywords": [],
