@@ -1,26 +1,26 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
+
 <template>
   <div>
     <Disclosure v-slot="{ open }" as="nav" class="bg-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
-            <!-- <div class="flex-shrink-0">
-              <img
-                class="h-8 w-8"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                alt="Workflow"
-              />
-            </div> -->
             <div class="hidden md:block">
               <div class="flex items-baseline space-x-4">
                 <template v-for="(item, itemIdx) in navigation">
                   <template v-if="itemIdx === 0">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a
                       :key="item"
                       href="https://www.icebreaker.top/"
-                      class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                      class="
+                        bg-gray-900
+                        text-white
+                        px-3
+                        py-2
+                        rounded-md
+                        text-sm
+                        font-medium
+                      "
                       >{{ item }}</a
                     >
                   </template>
@@ -28,7 +28,15 @@
                     v-else
                     :key="item"
                     href="https://www.icebreaker.top/"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    class="
+                      text-gray-300
+                      hover:bg-gray-700 hover:text-white
+                      px-3
+                      py-2
+                      rounded-md
+                      text-sm
+                      font-medium
+                    "
                     >{{ item }}</a
                   >
                 </template>
@@ -38,7 +46,18 @@
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
               <button
-                class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                class="
+                  bg-gray-800
+                  p-1
+                  rounded-full
+                  text-gray-400
+                  hover:text-white
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-offset-gray-800
+                  focus:ring-white
+                "
               >
                 <span class="sr-only">View notifications</span>
                 <BellIcon class="h-6 w-6" aria-hidden="true" />
@@ -48,7 +67,21 @@
           <div class="-mr-2 flex md:hidden">
             <!-- Mobile menu button -->
             <DisclosureButton
-              class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              class="
+                bg-gray-800
+                inline-flex
+                items-center
+                justify-center
+                p-2
+                rounded-md
+                text-gray-400
+                hover:text-white hover:bg-gray-700
+                focus:outline-none
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-offset-gray-800
+                focus:ring-white
+              "
             >
               <span class="sr-only">Open main menu</span>
               <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
@@ -66,7 +99,16 @@
               <a
                 :key="item"
                 href="#"
-                class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                class="
+                  bg-gray-900
+                  text-white
+                  block
+                  px-3
+                  py-2
+                  rounded-md
+                  text-base
+                  font-medium
+                "
                 >{{ item }}</a
               >
             </template>
@@ -74,7 +116,16 @@
               v-else
               :key="item"
               href="#"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              class="
+                text-gray-300
+                hover:bg-gray-700 hover:text-white
+                block
+                px-3
+                py-2
+                rounded-md
+                text-base
+                font-medium
+              "
               >{{ item }}</a
             >
           </template>
@@ -87,6 +138,14 @@
         <h1 class="text-3xl font-bold text-gray-900">
           icebreaker's serverless rendertron project
         </h1>
+        <h2>
+          网页上右键，查看源代码，你会发现
+          <code>id 为 app 里的 div 空无一物</code>
+        </h2>
+        <h2>
+          此时你打开 Network conditions ，更改自定义 User agent 为
+          Google，刷新再看看，这就是这个项目的意义
+        </h2>
       </div>
     </header>
     <main>
